@@ -13,7 +13,7 @@
 </head>
 <body>
 
-  <!-- Navbar (this is a placeholder, you can adjust as needed) -->
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
       <a class="navbar-brand" href="<%= root_path %>">Travel Journal</a>
@@ -24,7 +24,13 @@
               <span class="navbar-text">Hi, <%= current_user.username %></span>
             </li>
             <li class="nav-item">
-              <%= link_to 'Logout', logout_path, method: :delete, class: 'nav-link' %>
+              <form id="logout-form" action="<%= logout_path %>" method="POST" style="display: inline;">
+                <input type="hidden" name="_method" value="delete">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <button type="submit" class="nav-link btn btn-link" style="border: none; padding: 0; background: none; cursor: pointer;">
+                  Logout
+                </button>
+              </form>
             </li>
           <% else %>
             <li class="nav-item">
@@ -42,6 +48,9 @@
   <div class="container mt-4">
     <%= yield %>
   </div>
+
+  <!-- ✅ Bootstrap JavaScript (Fixed) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

@@ -53,7 +53,7 @@ Rails.application.configure do
     generator.assets false
     generator.test_framework nil
   end
-  
+
   config.hosts = nil
 
   # Raises error for missing translations.
@@ -64,7 +64,10 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
-  
+
   # So we don't get the "Cannot render console" message in Gitpod
   config.web_console.whiny_requests = false
+
+  # ✅ Fix for Active Storage: Specify local storage
+  config.active_storage.service = :local
 end

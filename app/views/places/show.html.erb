@@ -3,22 +3,31 @@
 <h2>My Entries</h2>
 
 <% if @place.entries.any? %>
-  <% @place.entries.each do |entry| %>
-    <div class="entry">
-      <h3><%= entry.title %></h3>
-      <h4><%= entry.occurred_on.strftime("%B %d, %Y") %></h4> <!-- Format the date nicely -->
-      <p><%= entry.description %></p>
+  <div class="container">
+    <div class="row">
+      <% @place.entries.each do |entry| %>
+        <div class="col-md-4 col-sm-6 mb-4"> <!-- 3 per row on large, 2 per row on medium, full width on small -->
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h3 class="card-title"><%= entry.title %></h3>
+              <h4 class="card-subtitle text-muted"><%= entry.occurred_on.strftime("%B %d, %Y") %></h4>
+              <p class="card-text"><%= entry.description %></p>
 
-      <!-- ✅ Display Image if Attached -->
-      <% if entry.image.attached? %>
-        <p><%= image_tag entry.image, class: "img-fluid" %></p>
+              <!-- ✅ Display Image if Attached -->
+              <% if entry.uploaded_image.attached? %>
+                <div class="text-center">
+                  <%= image_tag entry.uploaded_image, class: "img-fluid rounded" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
       <% end %>
-
     </div>
-  <% end %>
+  </div>
 <% else %>
   <p>No entries yet. Add one!</p>
 <% end %>
 
 <!-- ✅ Add New Entry Button -->
-<%= link_to "Add New Entry", new_place_entry_path(@place), class: "btn btn-primary" %>
+<%= link_to "Add New Entry", new_place_entry_path(@place), class: "btn btn-primary mt-3" %>
