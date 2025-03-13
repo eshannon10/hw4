@@ -23,3 +23,6 @@ end
 group :production do
   gem "pg"
 end
+
+
+gem "sassc-rails", "~> 2.1"

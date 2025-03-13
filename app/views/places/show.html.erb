@@ -1,16 +1,24 @@
-<h1><%= @place["name"] %></h1>
+<h1><%= @place.name %></h1>
 
 <h2>My Entries</h2>
-<% for entry in @entries %>
-  <h3><%= entry["title"] %></h3>
-  <h4><%= entry["occurred_on"] %></h4>
-  <p><%= entry["description"] %></p>
+
+<% if @place.entries.any? %>
+  <% @place.entries.each do |entry| %>
+    <div class="entry">
+      <h3><%= entry.title %></h3>
+      <h4><%= entry.occurred_on.strftime("%B %d, %Y") %></h4> <!-- Format the date nicely -->
+      <p><%= entry.description %></p>
+
+      <!-- ✅ Display Image if Attached -->
+      <% if entry.image.attached? %>
+        <p><%= image_tag entry.image, class: "img-fluid" %></p>
+      <% end %>
+
+    </div>
+  <% end %>
+<% else %>
+  <p>No entries yet. Add one!</p>
 <% end %>
 
-<p>
-  <a href="/entries/new?place_id=<%= @place["id"] %>">New Entry</a>
-</p>
-
-<p>
-  <a href="/places">Back to All Places</a>
-</p>
+<!-- ✅ Add New Entry Button -->
+<%= link_to "Add New Entry", new_place_entry_path(@place), class: "btn btn-primary" %>

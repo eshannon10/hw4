@@ -1,10 +1,10 @@
 <h1>New Place</h1>
 
-<form action="/places" method="post">
+<%= form_with model: @place, url: places_path, method: :post do |form| %>
   <p>
-    <label for="name_input">Name</label>
-    <input type="text" name="name" id="name_input">
+    <label for="place_name">Name</label>
+    <%= form.text_field :name %>
   </p>
 
-  <button>Save</button>
-</form>
+  <%= form.submit "Create Place" %>
+<% end %>
