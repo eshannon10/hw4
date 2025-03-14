@@ -70,4 +70,5 @@ Rails.application.configure do
 
   # ✅ Fix for Active Storage: Specify local storage
   config.active_storage.service = :local
+
 end

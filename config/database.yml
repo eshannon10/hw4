@@ -4,6 +4,7 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem "sqlite3"
 #
+# SQLite (development and test)
 default: &default
   adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -13,13 +14,16 @@ development:
   <<: *default
   database: db/development.sqlite3
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
+# Test environment (remains unchanged)
 test:
   <<: *default
   database: db/test.sqlite3
 
+# PostgreSQL for Production
 production:
   <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  database: travel_journal_production  # Replace with your actual app name
+  username: travel_journal
+  password: <%= ENV["TRAVEL_JOURNAL_DATABASE_PASSWORD"] %>
+  host: <%= ENV["DATABASE_URL"] %>
